@@ -1,0 +1,201 @@
+/* ==================== 全局与主窗口 ==================== */
+QMainWindow, QTabWidget::pane {
+    background-color: #f1f5f9;
+    border: none;
+}
+
+/* ==================== 标签页 ==================== */
+QTabBar::tab {
+    background-color: #e2e8f0;
+    color: #64748b;
+    border: none;
+    padding: 10px 24px;
+    margin-right: 4px;
+    font-size: 14px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+QTabBar::tab:selected {
+    background-color: #ffffff;
+    color: #3b82f6;
+    border-bottom: 3px solid #3b82f6;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #cbd5e1;
+    color: #475569;
+}
+
+/* ==================== 显示 ==================== */
+QLineEdit {
+    background-color: #ffffff;
+    color: #1e293b;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 18px;
+    selection-background-color: #3b82f6;
+}
+
+QLineEdit#show_results {
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 32px;
+    font-weight: bold;
+    border: 2px solid #bfdbfe;
+    min-height: 55px;
+}
+
+QLineEdit#show_formulas {
+    background-color: #f8fafc;
+    color: #64748b;
+    font-size: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+/* ==================== 按钮 ==================== */
+QPushButton {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #FFFFFF,
+        stop:1 #F1F5F9);
+    color: #1E293B;
+    border: 1px solid #CBD5E1;
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background: #FFFFFF;
+    border: 2px solid #3B82F6;
+    color: #3B82F6;
+}
+
+QPushButton:pressed {
+    background: #E2E8F0;
+    border: 1px solid #94A3B8;
+    padding-top: 2px;
+}
+
+QPushButton#operator_equal {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #34D399,
+        stop:1 #10B981);
+    color: #FFFFFF;
+    border: none;
+}
+
+QPushButton#operator_equal:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #6EE7B7,
+        stop:1 #34D399);
+    border: 2px solid #A7F3D0;
+}
+
+QPushButton#operator_equal:pressed {
+    background: #059669;
+}
+
+QPushButton#all_clear {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #fb7185,
+        stop:1 #f43f5e);
+    color: #ffffff;
+    border: none;
+}
+
+QPushButton#all_clear:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #fda4af,
+        stop:1 #fb7185);
+    border: 2px solid #fecdd3;
+}
+
+QPushButton#all_clear:pressed {
+    background: #e11d48;
+}
+
+QPushButton#backspace {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #fbbf24,
+        stop:1 #f59e0b);
+    color: #ffffff;
+    border: none;
+}
+
+QPushButton#backspace:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #fcd34d,
+        stop:1 #fbbf24);
+    border: 2px solid #fde68a;
+}
+
+QPushButton#form_abi,
+QPushButton#form_atheta {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #a78bfa,
+        stop:1 #8b5cf6);
+    color: #ffffff;
+    border: none;
+}
+
+QPushButton#form_abi:hover,
+QPushButton#form_atheta:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #c4b5fd,
+        stop:1 #a78bfa);
+    border: 2px solid #ddd6fe;
+}
+
+/* ==================== 焦点 ==================== */
+QPushButton:focus {
+    outline: none;
+    border: 2px solid #3b82f6;
+}
+
+QLineEdit:focus {
+    border: 2px solid #60a5fa;
+    background-color: #ffffff;
+}
+
+/* ==================== 画板 ==================== */
+QGraphicsView#graphicsView {
+    background-color: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 8px;
+}
+
+QGraphicsView#graphicsView > QWidget {
+    background-color: #ffffff;
+    border-radius: 12px;
+}
+
+QGraphicsView#graphicsView QScrollBar:vertical,
+QGraphicsView#graphicsView QScrollBar:horizontal {
+    background-color: #f1f5f9;
+    border-radius: 6px;
+    border: none;
+    width: 12px;
+    height: 12px;
+}
+
+QGraphicsView#graphicsView QScrollBar::handle:vertical,
+QGraphicsView#graphicsView QScrollBar::handle:horizontal {
+    background-color: #cbd5e1;
+    border-radius: 6px;
+    min-height: 30px;
+    min-width: 30px;
+}
+
+QGraphicsView#graphicsView QScrollBar::handle:hover {
+    background-color: #94a3b8;
+}
+
+QGraphicsView#graphicsView QScrollBar::add-line,
+QGraphicsView#graphicsView QScrollBar::sub-line {
+    height: 0px;
+    width: 0px;
+    background: none;
+}

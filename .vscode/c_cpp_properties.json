@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "gcc_13-1-0_cmake",
+            // Give Qt related header files to CMake for automatic management
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "mergeConfigurations": true
+        }
+    ],
+    "version": 4
+}
