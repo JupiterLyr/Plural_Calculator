@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QScatterSeries>
 #include <QValueAxis>
+#include "calculate.h"
 #include "complex.h"
 
 namespace Ui {
@@ -21,9 +22,11 @@ public:
 
 public slots:
     void requestUpdate(Complex cpx);
+    void onButtonClicked();
 
 private:
     Ui::MainWindow* ui;
+    Calculator* calc;
 
     QChart* chart;
     QLineSeries* realAxisSeries;   // 实轴
