@@ -3,8 +3,9 @@
 
 class Complex {
 public:
-    Complex(double r) : real(r), imag(0) {}
-    Complex(double r, double im): real(r), imag(im) {}
+    Complex() : real(0), imag(0) {}
+    Complex(double re) : real(re), imag(0) {}
+    Complex(double re, double im): real(re), imag(im) {}
 
 private:
     double real;
