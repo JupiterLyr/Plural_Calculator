@@ -1,6 +1,7 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 
+#include <cmath>
 #include <QString>
 #include <QStringList>
 
@@ -41,7 +42,7 @@ public:
         );
     }
 
-    QString toString() const {
+    QString toCartesianString() const {
         if (std::abs(imag) < 1e-9)
             return QString::number(real);
         if (std::abs(real) < 1e-9)
@@ -49,6 +50,15 @@ public:
         if (imag > 0)
             return QString("%1 + %2i").arg(real).arg(imag);
         return QString("%1 - %2i").arg(real).arg(std::abs(imag));
+    }
+
+    QString toPolarString() const {
+        if (std::abs(real) < 1e-9 && std::abs(imag) < 1e-9)
+            return "0";
+        // 计算振幅 A 和角度 θ (角度制)
+        double amp = std::hypot(real, imag);
+        double theta = std::atan2(imag, real) * 180.0 / M_PI;
+        return QString("%1 ∠ %2°").arg(amp).arg(theta);
     }
 
     static Complex fromString(QString s) {

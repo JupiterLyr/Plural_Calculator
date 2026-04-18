@@ -1,6 +1,7 @@
 #ifndef CALCULATE_H
 #define CALCULATE_H
 
+#include <QObject>
 #include "complex.h"
 
 // 输入模式
@@ -16,13 +17,21 @@ enum EditPart {
     Part_ImagOrAngle // 正在编辑虚部(b)或角度(θ)
 };
 
-class CalculatorLogic {
+// 结果显示模式
+enum ResultFormat {
+    Format_Cartesian, // 笛卡尔坐标模式 (a+bi)
+    Format_Polar      // 极坐标模式 (A∠θ)
+};
+
+class CalculatorLogic : public QObject {
+    Q_OBJECT
+
 public:
-    CalculatorLogic();
+    explicit CalculatorLogic(QObject* parent = nullptr);
 
     void inputDigit(const QString& digit);  // 输入数字(0-9)或小数点(.)
-    void inputSymbol_i();                    // 按下 i
-    void inputSymbol_angle();                // 按下 ∠
+    void inputSymbol_i();                   // 按下 i
+    void inputSymbol_angle();               // 按下 ∠
     void toggleSign();                      // 切换 ±
     void moveNext();                        // 按下 →
     void movePrev();                        // 按下 ←
@@ -34,10 +43,16 @@ public:
     QString getFormulaDisplay() const;      // 获取显示在 show_formulas 的文本
     QString getResultDisplay() const;       // 获取显示在 show_results 的文本
     bool getComplexEditing() const { return isComplexEditing; }
+    void setFormatCartesian();              // 显示为 a+bi 形式
+    void setFormatPolar();                  // 显示为 A∠θ 形式
+
+signals:
+    void requestUpdateChart(Complex cpx);
 
 private:
     InputMode currentMode;      // 当前输入模式
     EditPart currentEditPart;   // 当前编辑位置
+    ResultFormat displayFormat; // 当前结果显示形式
     QString part1Str;           // 缓存第一部分(实部/振幅)
     QString part2Str;           // 缓存第二部分(虚部/角度)
     bool isComplexEditing;      // 复数是否处于编辑状态

@@ -21,10 +21,10 @@ public:
     ~MainWindow();
 
 public slots:
-    void requestUpdate(Complex cpx);
     void onDigitClicked();
     void onOperatorClicked();
     void updateDisplay();
+    void updateChart(Complex cpx_res);
 
 private:
     Ui::MainWindow* ui;
@@ -40,7 +40,6 @@ private:
     QValueAxis* axisY;
 
     void setupChart();
-    void updateChart(double re, double im);
 };
 
 #endif // MAINWINDOW_H

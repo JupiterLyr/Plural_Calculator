@@ -1,8 +1,9 @@
 #include "calculate.h"
 #include <cmath>
 
-CalculatorLogic::CalculatorLogic() {
-    clearAll(); // 初始化状态
+CalculatorLogic::CalculatorLogic(QObject* parent) : QObject(parent) {
+    displayFormat = Format_Cartesian;
+    clearAll();
 }
 
 QString CalculatorLogic::getFormulaDisplay() const {
@@ -38,9 +39,19 @@ QString CalculatorLogic::getFormulaDisplay() const {
 }
 
 QString CalculatorLogic::getResultDisplay() const {
-    if (isWaitingForNewNum && pendingOperator.isEmpty() && historyFormula.isEmpty())
-        return currentResult.toString();  // 如果按了等号或者刚提交了一个数，显示当前结果或输入
-    return currentResult.toString(); // 动态显示当前累计结果
+    if (isWaitingForNewNum && pendingOperator.isEmpty() && historyFormula.isEmpty()) {
+        if (displayFormat == Format_Cartesian)
+            return currentResult.toCartesianString();
+        else if (displayFormat == Format_Polar)
+            return currentResult.toPolarString();
+    } // ↑ 如果按了等号或者刚提交了一个数，显示当前结果或输入
+    else {
+        if (displayFormat == Format_Cartesian)
+            return currentResult.toCartesianString();
+        else if (displayFormat == Format_Polar)
+            return currentResult.toPolarString();
+    } // ↑ 动态显示当前累计结果
+    return "Error!";
 }
 
 Complex CalculatorLogic::getCurrentInput() const {
@@ -136,21 +147,16 @@ void CalculatorLogic::toggleSign() {
 
 void CalculatorLogic::moveNext() {
     if (currentMode == Mode_Normal) return;
-    if (currentEditPart == Part_RealOrAmp) {
+    if (currentEditPart == Part_RealOrAmp)
         currentEditPart = Part_ImagOrAngle;
-    }
-    else {  // 在第二部分按右箭头，提交当前复数但不触发运算
+    else    // 在第二部分按右箭头，提交当前复数但不触发运算
         isComplexEditing = false;
-        // isWaitingForNewNum = true;
-        // currentResult = getCurrentInput();
-    }
 }
 
 void CalculatorLogic::movePrev() {
     if (currentMode == Mode_Normal) return;
-    if (currentEditPart == Part_ImagOrAngle) {
+    if (currentEditPart == Part_ImagOrAngle)
         currentEditPart = Part_RealOrAmp;
-    }
 }
 
 void CalculatorLogic::backspace() {
@@ -180,16 +186,22 @@ void CalculatorLogic::inputOperator(const QString& op) {
         calculateStep(currentOperand);
     pendingOperator = op;
     isWaitingForNewNum = true;
-    historyFormula = currentResult.toString() + " " + op + " ";
+    historyFormula = currentResult.toCartesianString() + " " + op + " ";
 }
 
 void CalculatorLogic::calculateEqual() {
-    if (pendingOperator.isEmpty()) return;
+    if (isComplexEditing) return;  // 处于输入状态时直接忽略
     Complex currentOperand = getCurrentInput();
-    calculateStep(currentOperand);
-    pendingOperator.clear();
+    if (!pendingOperator.isEmpty()) {  // 有挂起的运算符
+        calculateStep(currentOperand);
+        pendingOperator.clear();
+    }
+    else {
+        currentResult = currentOperand;
+    }
     isWaitingForNewNum = true;
     historyFormula = "";
+    emit requestUpdateChart(currentResult);
 }
 
 void CalculatorLogic::clearAll() {
@@ -202,4 +214,12 @@ void CalculatorLogic::clearAll() {
     pendingOperator.clear();
     isWaitingForNewNum = false;
     historyFormula.clear();
+}
+
+void CalculatorLogic::setFormatCartesian() {
+    displayFormat = Format_Cartesian;
+}
+
+void CalculatorLogic::setFormatPolar() {
+    displayFormat = Format_Polar;
 }

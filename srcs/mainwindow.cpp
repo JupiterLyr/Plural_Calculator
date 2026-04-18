@@ -27,6 +27,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->backspace, &QPushButton::clicked, this, [=]() { logic.backspace(); updateDisplay(); });
     connect(ui->operator_equal, &QPushButton::clicked, this, [=]() { logic.calculateEqual(); updateDisplay(); });
     connect(ui->all_clear, &QPushButton::clicked, this, [=]() { logic.clearAll(); updateDisplay(); });
+    connect(ui->form_abi, &QPushButton::clicked, this, [=]() { logic.setFormatCartesian(); updateDisplay(); });
+    connect(ui->form_atheta, &QPushButton::clicked, this, [=]() { logic.setFormatPolar(); updateDisplay(); });
+
+    connect(&logic, &CalculatorLogic::requestUpdateChart, this, &MainWindow::updateChart);
 
     updateDisplay();
 }
@@ -100,9 +104,9 @@ void MainWindow::setupChart() {
 }
 
 /// @brief 更新坐标系图像
-/// @param re 复数的实部
-/// @param im 复数的虚部
-void MainWindow::updateChart(double re, double im) {
+/// @param cpx_res 复数
+void MainWindow::updateChart(Complex cpx_res) {
+    double re = cpx_res.getRe(), im = cpx_res.getIm();
     pointSeries->clear();
     pointSeries->append(re, im);
     vectorSeries->clear();
@@ -125,10 +129,6 @@ void MainWindow::updateChart(double re, double im) {
     imagAxisSeries->clear();
     imagAxisSeries->append(0, minY);
     imagAxisSeries->append(0, maxY);
-}
-
-void MainWindow::requestUpdate(Complex cpx_res) {
-    updateChart(cpx_res.getRe(), cpx_res.getIm());
 }
 
 void MainWindow::onDigitClicked() {
