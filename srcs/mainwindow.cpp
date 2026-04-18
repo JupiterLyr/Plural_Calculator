@@ -6,16 +6,41 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     setupChart();
 
-    QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
-    for (auto btn : buttons) {
-        connect(btn, &QPushButton::clicked, this, &MainWindow::onButtonClicked);
+    QList<QPushButton*> digitBtn = {
+        ui->num_0, ui->num_1, ui->num_2, ui->num_3, ui->num_4,
+        ui->num_5, ui->num_6, ui->num_7, ui->num_8, ui->num_9, ui->num_point
+    };
+    for (auto btn : digitBtn) {
+        connect(btn, &QPushButton::clicked, this, &MainWindow::onDigitClicked);
     }
+    QList<QPushButton*> operatorBtn = {
+        ui->operator_add, ui->operator_subtract, ui->operator_multiply, ui->operator_divide
+    };
+    for (auto btn : operatorBtn) {
+        connect(btn, &QPushButton::clicked, this, &MainWindow::onOperatorClicked);
+    }
+    connect(ui->symbol_i, &QPushButton::clicked, this, [=]() { logic.inputSymbolI(); updateDisplay(); });
+    connect(ui->symbol_angle, &QPushButton::clicked, this, [=]() { logic.inputSymbolAngle(); updateDisplay(); });
+    connect(ui->operator_nxt, &QPushButton::clicked, this, [=]() { logic.moveNext(); updateDisplay(); });
+    connect(ui->operator_pre, &QPushButton::clicked, this, [=]() { logic.movePrev(); updateDisplay(); });
+    connect(ui->backspace, &QPushButton::clicked, this, [=]() { logic.backspace(); updateDisplay(); });
+    connect(ui->operator_equal, &QPushButton::clicked, this, [=]() { logic.calculateEqual(); updateDisplay(); });
+    connect(ui->all_clear, &QPushButton::clicked, this, [=]() { logic.clearAll(); updateDisplay(); });
+
+    updateDisplay();
 }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
 
+/// @brief 更新计算器显示内容
+void MainWindow::updateDisplay() {
+    ui->show_formulas->setText(logic.getFormulaDisplay());
+    ui->show_result->setText(logic.getResultDisplay());
+}
+
+/// @brief 初始化坐标系
 void MainWindow::setupChart() {
     chart = new QChart();
     chart->setAnimationOptions(QChart::NoAnimation);
@@ -67,15 +92,18 @@ void MainWindow::setupChart() {
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 }
 
-void MainWindow::updateComplex(double a, double b) {
+/// @brief 更新坐标系图像
+/// @param re 复数的实部
+/// @param im 复数的虚部
+void MainWindow::updateChart(double re, double im) {
     pointSeries->clear();
-    pointSeries->append(a, b);
+    pointSeries->append(re, im);
     vectorSeries->clear();
     vectorSeries->append(0, 0);
-    vectorSeries->append(a, b);
+    vectorSeries->append(re, im);
 
     double margin = 1.5;
-    double maxAbs = std::max({ std::abs(a), std::abs(b), 1.0 });
+    double maxAbs = std::max({ std::abs(re), std::abs(im), 1.0 });
     double R = maxAbs + margin;
     double minX = -R;
     double maxX = R;
@@ -93,25 +121,21 @@ void MainWindow::updateComplex(double a, double b) {
 }
 
 void MainWindow::requestUpdate(Complex cpx_res) {
-    updateComplex(cpx_res.getRe(), cpx_res.getIm());
+    updateChart(cpx_res.getRe(), cpx_res.getIm());
 }
 
-void MainWindow::onButtonClicked() {
+void MainWindow::onDigitClicked() {
     QPushButton* btn = qobject_cast<QPushButton*>(sender());
-    QString val = btn->text();
-
-    if (val == "AC") {
-        calc->clear();
-    } else if (val == "←") {
-        calc->backspace();
-    } else if (val == "=") {
-        calc->inputToken("=");
-        // 点击等号时，同步更新绘图
-        requestUpdate(calc->getRawResult());
-    } else {
-        calc->inputToken(val);
+    if (btn) {
+        logic.inputDigit(btn->text());
+        updateDisplay();
     }
-    // 实时显示到 Label
-    ui->show_formulas->setText(calc->getFormula());
-    ui->show_result->setText(calc->getDisplayResult());
+}
+
+void MainWindow::onOperatorClicked() {
+    QPushButton* btn = qobject_cast<QPushButton*>(sender());
+    if (btn) {
+        logic.inputOperator(btn->text());
+        updateDisplay();
+    }
 }

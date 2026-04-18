@@ -22,11 +22,13 @@ public:
 
 public slots:
     void requestUpdate(Complex cpx);
-    void onButtonClicked();
+    void onDigitClicked();
+    void onOperatorClicked();
+    void updateDisplay();
 
 private:
     Ui::MainWindow* ui;
-    Calculator* calc;
+    CalculatorLogic logic;
 
     QChart* chart;
     QLineSeries* realAxisSeries;   // 实轴
@@ -38,7 +40,7 @@ private:
     QValueAxis* axisY;
 
     void setupChart();
-    void updateComplex(double re, double im);
+    void updateChart(double re, double im);
 };
 
 #endif // MAINWINDOW_H

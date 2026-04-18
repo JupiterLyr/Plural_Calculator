@@ -3,29 +3,49 @@
 
 #include "complex.h"
 
-class Calculator {
+// 输入模式
+enum InputMode {
+    Mode_Normal,     // 普通输入模式（纯实数）
+    Mode_Cartesian,  // 笛卡尔坐标模式 (a+bi)
+    Mode_Polar       // 极坐标模式 (A∠θ)
+};
+
+// 当前正在编辑的部分
+enum EditPart {
+    Part_RealOrAmp,  // 正在编辑实部(a)或振幅(A)
+    Part_ImagOrAngle // 正在编辑虚部(b)或角度(θ)
+};
+
+class CalculatorLogic {
 public:
-    Calculator();
+    CalculatorLogic();
 
-    void inputToken(QString token); // 输入数字、运算符、括号等
-    void clear();                   // AC
-    void backspace();               // ←
+    void inputDigit(const QString& digit);   // 输入数字(0-9)或小数点(.)
+    void inputSymbolI();                     // 按下 i
+    void inputSymbolAngle();                 // 按下 ∠
+    void moveNext();                         // 按下 →
+    void movePrev();                         // 按下 ←
+    void backspace();                        // 按下 DEL
+    void inputOperator(const QString& op);   // 按下 +, -, *, /
+    void calculateEqual();                   // 按下 =
+    void clearAll();                         // 按下 AC
 
-    QString getFormula() const { return formula; }
-    QString getDisplayResult() const { return resultStr; }
-    Complex getRawResult() const { return accumulator; }
+    QString getFormulaDisplay() const;       // 获取显示在 show_formulas 的文本
+    QString getResultDisplay() const;        // 获取显示在 show_results 的文本
 
 private:
-    QString formula;      // 对应 show_formulas
-    QString resultStr;    // 对应 show_result
-    QString currentToken; // 当前括号内正在输入的字符串
+    InputMode currentMode;      // 当前输入模式
+    EditPart currentEditPart;   // 当前编辑位置
+    QString part1Str;           // 缓存第一部分(实部/振幅)
+    QString part2Str;           // 缓存第二部分(虚部/角度)
+    
+    Complex currentResult;      // 累计结果
+    QString pendingOperator;    // 挂起的运算符
+    bool isWaitingForNewNum;    // 运算后是否等待新输入
+    QString historyFormula;     // 历史公式字符串
 
-    Complex accumulator;  // 累加的结果
-    QString pendingOp;    // 待处理的运算符 (+, -, *, /)
-    bool hasAccumulator;  // 是否已有第一个运算数
-    bool inBracket;       // 是否正在括号内输入
-
-    void performCalc();   // 执行实际计算
+    Complex getCurrentInput() const;    // 获取输入的复数
+    void calculateStep(const Complex& nextOperand); 
 };
 
 #endif
