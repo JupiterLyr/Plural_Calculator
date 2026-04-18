@@ -3,6 +3,7 @@
 
 CalculatorLogic::CalculatorLogic(QObject* parent) : QObject(parent) {
     displayFormat = Format_Cartesian;
+    hasError = false;
     clearAll();
 }
 
@@ -39,6 +40,7 @@ QString CalculatorLogic::getFormulaDisplay() const {
 }
 
 QString CalculatorLogic::getResultDisplay() const {
+    if (hasError) return "Error!";
     if (isWaitingForNewNum && pendingOperator.isEmpty() && historyFormula.isEmpty()) {
         if (displayFormat == Format_Cartesian)
             return currentResult.toCartesianString();
@@ -81,7 +83,11 @@ void CalculatorLogic::calculateStep(const Complex& nextOperand) {
         currentResult = currentResult * nextOperand;
     }
     else if (op == "÷" || op == "/") {
-        currentResult = currentResult / nextOperand;
+        double denom = nextOperand.getRe() * nextOperand.getRe() + nextOperand.getIm() * nextOperand.getIm();
+        if (denom < 1e-15)
+            hasError = true;  // 除以 0 错误
+        else
+            currentResult = currentResult / nextOperand;
     }
 }
 
@@ -123,7 +129,6 @@ void CalculatorLogic::inputSymbol_angle() {
     isComplexEditing = true;
 }
 
-/// @brief 符号取反
 void CalculatorLogic::toggleSign() {
     // 如果刚计算完结果，按下 +/- 直接开始一个新的负数输入
     if (isWaitingForNewNum) {
@@ -213,6 +218,7 @@ void CalculatorLogic::clearAll() {
     currentResult = Complex(0, 0);
     pendingOperator.clear();
     isWaitingForNewNum = false;
+    hasError = false;
     historyFormula.clear();
 }
 

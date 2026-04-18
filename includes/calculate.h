@@ -43,6 +43,7 @@ public:
     QString getFormulaDisplay() const;      // 获取显示在 show_formulas 的文本
     QString getResultDisplay() const;       // 获取显示在 show_results 的文本
     bool getComplexEditing() const { return isComplexEditing; }
+    bool getErrorCondition() const { return hasError; }
     void setFormatCartesian();              // 显示为 a+bi 形式
     void setFormatPolar();                  // 显示为 A∠θ 形式
 
@@ -56,6 +57,7 @@ private:
     QString part1Str;           // 缓存第一部分(实部/振幅)
     QString part2Str;           // 缓存第二部分(虚部/角度)
     bool isComplexEditing;      // 复数是否处于编辑状态
+    bool hasError;              // 是否在计算中发生错误
 
     Complex currentResult;      // 累计结果
     QString pendingOperator;    // 挂起的运算符

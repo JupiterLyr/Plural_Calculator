@@ -28,29 +28,26 @@ QTabBar::tab:hover:!selected {
 }
 
 /* ==================== 显示 ==================== */
-QLineEdit {
-    background-color: #ffffff;
+QLabel {
+    background-color: #FFFFFF;
     color: #1e293b;
     border: 2px solid #e2e8f0;
     border-radius: 12px;
-    padding: 16px;
-    font-size: 18px;
     selection-background-color: #3b82f6;
 }
 
-QLineEdit#show_results {
+QLabel#show_result {
     background: #ffffff;
     color: #0f172a;
-    font-size: 32px;
+    font-size: 24pt;
     font-weight: bold;
     border: 2px solid #bfdbfe;
-    min-height: 55px;
 }
 
-QLineEdit#show_formulas {
+QLabel#show_formulas {
     background-color: #f8fafc;
     color: #64748b;
-    font-size: 16px;
+    font-size: 12pt;
     border: 1px solid #e2e8f0;
 }
 
@@ -102,84 +99,105 @@ QPushButton#operator_equal:pressed {
     background: #059669;
 }
 
+QPushButton#operator_equal:disabled {
+    background: #B1B1B1;
+}
+
 QPushButton#all_clear {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-        stop:0 #fb7185,
-        stop:1 #f43f5e);
-    color: #ffffff;
+        stop:0 #FB7185,
+        stop:1 #F43F5E);
+    color: #FFFFFF;
     border: none;
 }
 
 QPushButton#all_clear:hover {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-        stop:0 #fda4af,
-        stop:1 #fb7185);
-    border: 2px solid #fecdd3;
+        stop:0 #FDA4AF,
+        stop:1 #FB7185);
+    border: 2px solid #FECDD3;
 }
 
 QPushButton#all_clear:pressed {
-    background: #e11d48;
+    background: #E11D48;
 }
 
 QPushButton#backspace {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-        stop:0 #fbbf24,
-        stop:1 #f59e0b);
-    color: #ffffff;
+        stop:0 #FBBF24,
+        stop:1 #F59E0B);
+    color: #FFFFFF;
     border: none;
 }
 
 QPushButton#backspace:hover {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-        stop:0 #fcd34d,
-        stop:1 #fbbf24);
-    border: 2px solid #fde68a;
+        stop:0 #FCD34D,
+        stop:1 #FBBF24);
+    border: 2px solid #FDE68A;
+}
+
+QPushButton#all_clear:pressed {
+    background: #F59E0B;
+}
+
+QPushButton#backspace:disabled {
+    background: #D3D3D3;
 }
 
 QPushButton#form_abi,
 QPushButton#form_atheta {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-        stop:0 #a78bfa,
-        stop:1 #8b5cf6);
-    color: #ffffff;
+        stop:0 #BCA6FE,
+        stop:1 #9E75FF);
+    color: #FFFFFF;
     border: none;
 }
 
 QPushButton#form_abi:hover,
 QPushButton#form_atheta:hover {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-        stop:0 #c4b5fd,
-        stop:1 #a78bfa);
-    border: 2px solid #ddd6fe;
+        stop:0 #D1C6FF,
+        stop:1 #B39AFF);
+    border: 2px solid #DBD5F7;
+}
+
+QPushButton#form_abi:pressed,
+QPushButton#form_atheta:pressed {
+    background: #9E75FF;
+}
+
+QPushButton#form_abi:disabled,
+QPushButton#form_atheta:disabled {
+    background: #B0AFB1;
 }
 
 /* ==================== 焦点 ==================== */
 QPushButton:focus {
     outline: none;
-    border: 2px solid #3b82f6;
+    border: 2px solid #3B82F6;
 }
 
 QLineEdit:focus {
-    border: 2px solid #60a5fa;
-    background-color: #ffffff;
+    border: 2px solid #60A5FA;
+    background-color: #FFFFFF;
 }
 
 /* ==================== 画板 ==================== */
 QGraphicsView#graphicsView {
-    background-color: #f8fafc;
-    border: 2px solid #e2e8f0;
+    background-color: #F9FFFD;
+    border: 2px solid #E2E8F0;
     border-radius: 16px;
-    padding: 8px;
 }
 
 QGraphicsView#graphicsView > QWidget {
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     border-radius: 12px;
 }
 
 QGraphicsView#graphicsView QScrollBar:vertical,
 QGraphicsView#graphicsView QScrollBar:horizontal {
-    background-color: #f1f5f9;
+    background-color: #F1F5F9;
     border-radius: 6px;
     border: none;
     width: 12px;
@@ -188,14 +206,14 @@ QGraphicsView#graphicsView QScrollBar:horizontal {
 
 QGraphicsView#graphicsView QScrollBar::handle:vertical,
 QGraphicsView#graphicsView QScrollBar::handle:horizontal {
-    background-color: #cbd5e1;
+    background-color: #CBD5E1;
     border-radius: 6px;
     min-height: 30px;
     min-width: 30px;
 }
 
 QGraphicsView#graphicsView QScrollBar::handle:hover {
-    background-color: #94a3b8;
+    background-color: #94A3B8;
 }
 
 QGraphicsView#graphicsView QScrollBar::add-line,

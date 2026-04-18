@@ -6,29 +6,33 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     setupChart();
 
-    QList<QPushButton*> digitBtn = {
+    digitBtn = {
         ui->num_0, ui->num_1, ui->num_2, ui->num_3, ui->num_4,
         ui->num_5, ui->num_6, ui->num_7, ui->num_8, ui->num_9, ui->num_point
     };
     for (auto btn : digitBtn) {
         connect(btn, &QPushButton::clicked, this, &MainWindow::onDigitClicked);
     }
-    QList<QPushButton*> operatorBtn = {
+    operatorBtn = {
         ui->operator_add, ui->operator_subtract, ui->operator_multiply, ui->operator_divide
     };
     for (auto btn : operatorBtn) {
         connect(btn, &QPushButton::clicked, this, &MainWindow::onOperatorClicked);
     }
+    elseBtnXceptAC = {
+        ui->num_opposite, ui->symbol_i, ui->symbol_angle, ui->operator_pre, ui->operator_nxt,
+        ui->backspace, ui->operator_equal, ui->form_abi, ui->form_atheta
+    };
     connect(ui->num_opposite, &QPushButton::clicked, this, [=]() { logic.toggleSign(); updateDisplay(); });
     connect(ui->symbol_i, &QPushButton::clicked, this, [=]() { logic.inputSymbol_i(); updateDisplay(); });
     connect(ui->symbol_angle, &QPushButton::clicked, this, [=]() { logic.inputSymbol_angle(); updateDisplay(); });
     connect(ui->operator_nxt, &QPushButton::clicked, this, [=]() { logic.moveNext(); updateDisplay(); });
     connect(ui->operator_pre, &QPushButton::clicked, this, [=]() { logic.movePrev(); updateDisplay(); });
     connect(ui->backspace, &QPushButton::clicked, this, [=]() { logic.backspace(); updateDisplay(); });
-    connect(ui->operator_equal, &QPushButton::clicked, this, [=]() { logic.calculateEqual(); updateDisplay(); });
-    connect(ui->all_clear, &QPushButton::clicked, this, [=]() { logic.clearAll(); updateDisplay(); });
     connect(ui->form_abi, &QPushButton::clicked, this, [=]() { logic.setFormatCartesian(); updateDisplay(); });
     connect(ui->form_atheta, &QPushButton::clicked, this, [=]() { logic.setFormatPolar(); updateDisplay(); });
+    connect(ui->operator_equal, &QPushButton::clicked, this, [=]() { logic.calculateEqual(); updateDisplay(); });
+    connect(ui->all_clear, &QPushButton::clicked, this, [=]() { logic.clearAll(); updateDisplay(); });
 
     connect(&logic, &CalculatorLogic::requestUpdateChart, this, &MainWindow::updateChart);
 
@@ -39,22 +43,33 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
+/// @brief 按钮 + - * / = 的可用性转换
+/// @param canOperate ``true`` - 可用 | ``false`` - 不可用
+/// @param btnList 待操作按钮的指针列表
+void MainWindow::btnAvailability(bool canOperate, QList<QPushButton*> btnList) {
+    for (const auto& btn : btnList) {
+        if (btn) btn->setEnabled(canOperate);
+    }
+}
+
 /// @brief 更新计算器显示内容
 void MainWindow::updateDisplay() {
     ui->show_formulas->setText(logic.getFormulaDisplay());
     ui->show_result->setText(logic.getResultDisplay());
-    bool canOperate = !logic.getComplexEditing();
-    ui->operator_add->setEnabled(canOperate);
-    ui->operator_subtract->setEnabled(canOperate);
-    ui->operator_multiply->setEnabled(canOperate);
-    ui->operator_divide->setEnabled(canOperate);
-    ui->operator_equal->setEnabled(canOperate);
+    btnAvailability(!logic.getComplexEditing(), operatorBtn);
+    if (logic.getErrorCondition()) {    // 错误状态禁用 AC 外的所有按钮
+        btnAvailability(!logic.getErrorCondition(), digitBtn + operatorBtn + elseBtnXceptAC);
+    }
+    else if (!ui->num_0->isEnabled()) { // 数字键都被禁用，说明需要解禁
+        btnAvailability(true, digitBtn + operatorBtn + elseBtnXceptAC);
+    }
 }
 
 /// @brief 初始化坐标系
 void MainWindow::setupChart() {
     chart = new QChart();
     chart->setAnimationOptions(QChart::NoAnimation);
+    chart->setBackgroundVisible(false);
 
     axisX = new QValueAxis();
     axisY = new QValueAxis();

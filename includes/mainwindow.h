@@ -3,7 +3,9 @@
 
 #include <QChart>
 #include <QLineSeries>
+#include <QList>
 #include <QMainWindow>
+#include <QPushButton>
 #include <QScatterSeries>
 #include <QValueAxis>
 #include "calculate.h"
@@ -19,6 +21,7 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
+    void btnAvailability(bool canOperate, QList<QPushButton*> btnList);
 
 public slots:
     void onDigitClicked();
@@ -38,6 +41,8 @@ private:
     QLineSeries* vectorSeries;     // 向量
     QValueAxis* axisX;
     QValueAxis* axisY;
+
+    QList<QPushButton*> digitBtn, operatorBtn, elseBtnXceptAC;
 
     void setupChart();
 };
