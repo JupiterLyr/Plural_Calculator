@@ -22,15 +22,23 @@ public:
     }
 
     Complex operator*(const Complex& other) const {
-        return Complex(real * other.real - imag * other.imag,
-            real * other.imag + imag * other.real);
+        return Complex(
+            real * other.real - imag * other.imag,
+            real * other.imag + imag * other.real
+        );
     }
 
     Complex operator/(const Complex& other) const {
+        // (a+bi) / (c+di) = [(ac+bd) + (bc-ad)i] / (c^2+d^2)
+        // 计算分母: c^2 + d^2
         double denom = other.real * other.real + other.imag * other.imag;
-        if (std::abs(denom) < 1e-9) return Complex(0, 0); // 防零除处理
-        return Complex((real * other.real + imag * other.imag) / denom,
-            (imag * other.real - real * other.imag) / denom);
+        if (denom < 1e-15) {  // 防零除保护
+            return Complex(0, 0); // 也可以抛出异常，但在计算器UI中返回0可防崩溃
+        }
+        return Complex(
+            (real * other.real + imag * other.imag) / denom,
+            (imag * other.real - real * other.imag) / denom
+        );
     }
 
     QString toString() const {

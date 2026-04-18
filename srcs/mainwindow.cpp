@@ -19,8 +19,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     for (auto btn : operatorBtn) {
         connect(btn, &QPushButton::clicked, this, &MainWindow::onOperatorClicked);
     }
-    connect(ui->symbol_i, &QPushButton::clicked, this, [=]() { logic.inputSymbolI(); updateDisplay(); });
-    connect(ui->symbol_angle, &QPushButton::clicked, this, [=]() { logic.inputSymbolAngle(); updateDisplay(); });
+    connect(ui->num_opposite, &QPushButton::clicked, this, [=]() { logic.toggleSign(); updateDisplay(); });
+    connect(ui->symbol_i, &QPushButton::clicked, this, [=]() { logic.inputSymbol_i(); updateDisplay(); });
+    connect(ui->symbol_angle, &QPushButton::clicked, this, [=]() { logic.inputSymbol_angle(); updateDisplay(); });
     connect(ui->operator_nxt, &QPushButton::clicked, this, [=]() { logic.moveNext(); updateDisplay(); });
     connect(ui->operator_pre, &QPushButton::clicked, this, [=]() { logic.movePrev(); updateDisplay(); });
     connect(ui->backspace, &QPushButton::clicked, this, [=]() { logic.backspace(); updateDisplay(); });
@@ -38,6 +39,12 @@ MainWindow::~MainWindow() {
 void MainWindow::updateDisplay() {
     ui->show_formulas->setText(logic.getFormulaDisplay());
     ui->show_result->setText(logic.getResultDisplay());
+    bool canOperate = !logic.getComplexEditing();
+    ui->operator_add->setEnabled(canOperate);
+    ui->operator_subtract->setEnabled(canOperate);
+    ui->operator_multiply->setEnabled(canOperate);
+    ui->operator_divide->setEnabled(canOperate);
+    ui->operator_equal->setEnabled(canOperate);
 }
 
 /// @brief 初始化坐标系
