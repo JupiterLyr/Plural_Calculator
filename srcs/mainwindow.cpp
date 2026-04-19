@@ -1,10 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QIcon>
 #include <QPen>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    setupChart();
+    this->setFixedSize(458, 590);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
+    this->setStatusBar(nullptr);  // 禁用状态栏
+    this->setWindowIcon(QIcon(":/resources/icon.png"));
 
     digitBtn = {
         ui->num_0, ui->num_1, ui->num_2, ui->num_3, ui->num_4,
@@ -36,6 +40,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(&logic, &CalculatorLogic::requestUpdateChart, this, &MainWindow::updateChart);
 
+    setupChart();
     updateDisplay();
 }
 

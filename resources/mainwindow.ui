@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>459</width>
-    <height>607</height>
+    <width>458</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>复数计算器</string>
+   <string>Plural Calculator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>461</width>
-      <height>581</height>
+      <width>460</width>
+      <height>580</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -28,7 +28,7 @@
     </property>
     <widget class="QWidget" name="tab_cal">
      <attribute name="title">
-      <string>计算器</string>
+      <string>Calculator</string>
      </attribute>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
@@ -957,7 +957,7 @@
     </widget>
     <widget class="QWidget" name="tab_chart">
      <attribute name="title">
-      <string>复平面</string>
+      <string>Chart</string>
      </attribute>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.1]
+### Added
+- 配置了图标文件
+### Fixed
+- 优化了部分 UI
+
 ## [1.2.0]
 ### Fixed
 - 0 作除数时，不再简单返回 0，而是改为 "Error!"

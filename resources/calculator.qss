@@ -1,13 +1,13 @@
 /* ==================== 全局与主窗口 ==================== */
 QMainWindow, QTabWidget::pane {
-    background-color: #f1f5f9;
+    background-color: #F1F5F9;
     border: none;
 }
 
 /* ==================== 标签页 ==================== */
 QTabBar::tab {
-    background-color: #e2e8f0;
-    color: #64748b;
+    background-color: #E2E8F0;
+    color: #64748B;
     border: none;
     padding: 10px 24px;
     margin-right: 4px;
@@ -17,38 +17,38 @@ QTabBar::tab {
 }
 
 QTabBar::tab:selected {
-    background-color: #ffffff;
-    color: #3b82f6;
-    border-bottom: 3px solid #3b82f6;
+    background-color: #FFFFFF;
+    color: #3B82F6;
+    border-bottom: 3px solid #3B82F6;
 }
 
 QTabBar::tab:hover:!selected {
-    background-color: #cbd5e1;
+    background-color: #CBD5E1;
     color: #475569;
 }
 
 /* ==================== 显示 ==================== */
 QLabel {
     background-color: #FFFFFF;
-    color: #1e293b;
-    border: 2px solid #e2e8f0;
+    color: #1E293B;
+    border: 2px solid #E2E8F0;
     border-radius: 12px;
-    selection-background-color: #3b82f6;
+    selection-background-color: #3B82F6;
 }
 
 QLabel#show_result {
-    background: #ffffff;
-    color: #0f172a;
+    background: #FFFFFF;
+    color: #0F172A;
     font-size: 24pt;
     font-weight: bold;
-    border: 2px solid #bfdbfe;
+    border: 2px solid #BFDBFE;
 }
 
 QLabel#show_formulas {
     background-color: #f8fafc;
-    color: #64748b;
+    color: #64748B;
     font-size: 12pt;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #E2E8F0;
 }
 
 /* ==================== 按钮 ==================== */
@@ -185,7 +185,7 @@ QLineEdit:focus {
 
 /* ==================== 画板 ==================== */
 QGraphicsView#graphicsView {
-    background-color: #F9FFFD;
+    background-color: #FFFFFF;
     border: 2px solid #E2E8F0;
     border-radius: 16px;
 }

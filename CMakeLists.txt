@@ -27,7 +27,7 @@ file(GLOB SRC_FILES
 set(CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/resources")
 set(UI_FILES "${PROJECT_SOURCE_DIR}/resources/mainwindow.ui")
 # 资源配置文件
-set(RC_FILES "${PROJECT_SOURCE_DIR}/res_config.qrc")
+set(RC_FILES "${PROJECT_SOURCE_DIR}/res_config.qrc" "${PROJECT_SOURCE_DIR}/icon_config.rc")
 # 添加可执行文件
 add_executable(${PROJECT_NAME}
     ${SRC_FILES}
