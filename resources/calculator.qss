@@ -1,33 +1,4 @@
-/* ==================== 全局与主窗口 ==================== */
-QMainWindow, QTabWidget::pane {
-    background-color: #F1F5F9;
-    border: none;
-}
-
-/* ==================== 标签页 ==================== */
-QTabBar::tab {
-    background-color: #E2E8F0;
-    color: #64748B;
-    border: none;
-    padding: 10px 24px;
-    margin-right: 4px;
-    font-size: 14px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-QTabBar::tab:selected {
-    background-color: #FFFFFF;
-    color: #3B82F6;
-    border-bottom: 3px solid #3B82F6;
-}
-
-QTabBar::tab:hover:!selected {
-    background-color: #CBD5E1;
-    color: #475569;
-}
-
-/* ==================== 显示 ==================== */
+/* 显示窗 */
 QLabel {
     background-color: #FFFFFF;
     color: #1E293B;
@@ -51,7 +22,7 @@ QLabel#show_formulas {
     border: 1px solid #E2E8F0;
 }
 
-/* ==================== 按钮 ==================== */
+/* 按钮 */
 QPushButton {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
         stop:0 #FFFFFF,
@@ -137,7 +108,7 @@ QPushButton#backspace:hover {
     border: 2px solid #FDE68A;
 }
 
-QPushButton#all_clear:pressed {
+QPushButton#backspace:pressed {
     background: #F59E0B;
 }
 
@@ -170,55 +141,4 @@ QPushButton#form_atheta:pressed {
 QPushButton#form_abi:disabled,
 QPushButton#form_atheta:disabled {
     background: #B0AFB1;
-}
-
-/* ==================== 焦点 ==================== */
-QPushButton:focus {
-    outline: none;
-    border: 2px solid #3B82F6;
-}
-
-QLineEdit:focus {
-    border: 2px solid #60A5FA;
-    background-color: #FFFFFF;
-}
-
-/* ==================== 画板 ==================== */
-QGraphicsView#graphicsView {
-    background-color: #FFFFFF;
-    border: 2px solid #E2E8F0;
-    border-radius: 16px;
-}
-
-QGraphicsView#graphicsView > QWidget {
-    background-color: #FFFFFF;
-    border-radius: 12px;
-}
-
-QGraphicsView#graphicsView QScrollBar:vertical,
-QGraphicsView#graphicsView QScrollBar:horizontal {
-    background-color: #F1F5F9;
-    border-radius: 6px;
-    border: none;
-    width: 12px;
-    height: 12px;
-}
-
-QGraphicsView#graphicsView QScrollBar::handle:vertical,
-QGraphicsView#graphicsView QScrollBar::handle:horizontal {
-    background-color: #CBD5E1;
-    border-radius: 6px;
-    min-height: 30px;
-    min-width: 30px;
-}
-
-QGraphicsView#graphicsView QScrollBar::handle:hover {
-    background-color: #94A3B8;
-}
-
-QGraphicsView#graphicsView QScrollBar::add-line,
-QGraphicsView#graphicsView QScrollBar::sub-line {
-    height: 0px;
-    width: 0px;
-    background: none;
 }

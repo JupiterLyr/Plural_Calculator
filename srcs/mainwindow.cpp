@@ -1,7 +1,10 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include <QIcon>
+#include <QKeySequence>
 #include <QPen>
+#include <QShortcut>
+#include <vector>
+#include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -42,6 +45,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     setupChart();
     updateDisplay();
+    initShortcuts();
 }
 
 MainWindow::~MainWindow() {
@@ -165,4 +169,51 @@ void MainWindow::onOperatorClicked() {
         logic.inputOperator(btn->text());
         updateDisplay();
     }
+}
+
+void MainWindow::initShortcuts() {
+    struct Item {
+        QKeySequence key;
+        QPushButton* btn;
+    };
+    std::vector<Item> items = {  // 设置全部快捷键
+        {QKeySequence(Qt::Key_0), ui->num_0},
+        {QKeySequence(Qt::Key_1), ui->num_1},
+        {QKeySequence(Qt::Key_2), ui->num_2},
+        {QKeySequence(Qt::Key_3), ui->num_3},
+        {QKeySequence(Qt::Key_4), ui->num_4},
+        {QKeySequence(Qt::Key_5), ui->num_5},
+        {QKeySequence(Qt::Key_6), ui->num_6},
+        {QKeySequence(Qt::Key_7), ui->num_7},
+        {QKeySequence(Qt::Key_8), ui->num_8},
+        {QKeySequence(Qt::Key_9), ui->num_9},
+        {QKeySequence(Qt::Key_Period), ui->num_point},
+        {QKeySequence(Qt::Key_Backslash), ui->num_opposite},
+        {QKeySequence(Qt::Key_Plus), ui->operator_add},
+        {QKeySequence(Qt::Key_Minus), ui->operator_subtract},
+        {QKeySequence(Qt::Key_Asterisk), ui->operator_multiply},
+        {QKeySequence(Qt::Key_Slash), ui->operator_divide},
+        {QKeySequence(Qt::Key_Enter), ui->operator_equal},
+        {QKeySequence(Qt::Key_Return), ui->operator_equal},
+        {QKeySequence(Qt::Key_Left), ui->operator_pre},
+        {QKeySequence(Qt::Key_Right), ui->operator_nxt},
+        {QKeySequence(Qt::Key_I), ui->symbol_i},
+        {QKeySequence(Qt::Key_A), ui->symbol_angle},
+        {QKeySequence(Qt::Key_D), ui->form_abi},
+        {QKeySequence(Qt::Key_P), ui->form_atheta},
+        {QKeySequence(Qt::Key_Backspace), ui->backspace},
+        {QKeySequence(Qt::Key_Escape), ui->all_clear}
+    };
+    for (auto& it : items) {
+        if (it.btn) {
+            QShortcut* sc = new QShortcut(it.key, this);
+            connect(sc, &QShortcut::activated, it.btn, &QPushButton::animateClick);
+        }
+    }
+    // 设置悬浮提示
+    ui->symbol_i->setToolTip("定义笛卡尔形式的复数 (I)");
+    ui->symbol_angle->setToolTip("定义极坐标形式的复数 (A)");
+    ui->form_abi->setToolTip("以笛卡尔形式显示 (D)");
+    ui->form_atheta->setToolTip("以极坐标形式显示 (P)");
+    ui->num_opposite->setToolTip("取反 (\\)");
 }

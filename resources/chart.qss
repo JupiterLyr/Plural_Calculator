@@ -1,0 +1,38 @@
+QGraphicsView#graphicsView {
+    background-color: #FFFFFF;
+    border: 2px solid #E2E8F0;
+    border-radius: 16px;
+}
+
+QGraphicsView#graphicsView > QWidget {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+}
+
+QGraphicsView#graphicsView QScrollBar:vertical,
+QGraphicsView#graphicsView QScrollBar:horizontal {
+    background-color: #F1F5F9;
+    border-radius: 6px;
+    border: none;
+    width: 12px;
+    height: 12px;
+}
+
+QGraphicsView#graphicsView QScrollBar::handle:vertical,
+QGraphicsView#graphicsView QScrollBar::handle:horizontal {
+    background-color: #CBD5E1;
+    border-radius: 6px;
+    min-height: 30px;
+    min-width: 30px;
+}
+
+QGraphicsView#graphicsView QScrollBar::handle:hover {
+    background-color: #94A3B8;
+}
+
+QGraphicsView#graphicsView QScrollBar::add-line,
+QGraphicsView#graphicsView QScrollBar::sub-line {
+    height: 0px;
+    width: 0px;
+    background: none;
+}

@@ -1,0 +1,47 @@
+QMainWindow, QTabWidget::pane {
+    background-color: #F1F5F9;
+    border: none;
+}
+
+/* 标签页 */
+QTabBar::tab {
+    background-color: #E2E8F0;
+    color: #64748B;
+    border: none;
+    padding: 10px 24px;
+    margin-right: 4px;
+    font-size: 14px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+QTabBar::tab:selected {
+    background-color: #FFFFFF;
+    color: #3B82F6;
+    border-bottom: 3px solid #3B82F6;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #CBD5E1;
+    color: #475569;
+}
+
+/* 悬浮窗 */
+QToolTip {
+    background-color: #FFFFFF;
+    color: #404040;
+    border: none;
+    padding: 2px;
+    font-size: 12px;
+}
+
+/* 焦点 */
+QPushButton:focus {
+    outline: none;
+    border: 2px solid #3B82F6;
+}
+
+QLineEdit:focus {
+    border: 2px solid #60A5FA;
+    background-color: #FFFFFF;
+}

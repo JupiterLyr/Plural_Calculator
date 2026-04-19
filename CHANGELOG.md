@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.0]
+### Added
+- 增设了按键绑定，现已支持电脑键盘输入
+- 对个别按钮增加了悬浮气泡提示
+
 ## [1.2.1]
 ### Added
 - 配置了图标文件

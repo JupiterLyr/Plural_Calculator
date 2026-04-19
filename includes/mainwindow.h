@@ -45,6 +45,7 @@ private:
     QList<QPushButton*> digitBtn, operatorBtn, elseBtnXceptAC;
 
     void setupChart();
+    void initShortcuts();
 };
 
 #endif // MAINWINDOW_H

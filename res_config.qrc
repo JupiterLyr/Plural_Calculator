@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/calculator.qss</file>
         <file>resources/icon.png</file>
+        <file>resources/calculator.qss</file>
+        <file>resources/global.qss</file>
+        <file>resources/chart.qss</file>
     </qresource>
 </RCC>
