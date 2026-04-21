@@ -1,0 +1,36 @@
+/* 全局背景 */
+QWizard {
+    background-color:rgb(225, 247, 233);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* 文本标签样式 */
+QLabel {
+    font-size: 15px;
+    color: #2c3e50;
+    /* padding: 10px 0; */
+}
+
+/* 按钮样式 */
+QPushButton {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 20px;
+    /* font-size: 13px; */
+    min-width: 80px;
+}
+
+/* 进度条 */
+QProgressBar {
+    border: 1px solid rgb(157, 162, 166);
+    border-radius: 3px;
+    background-color: #ecf0f1;
+    height: 20px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: #27ae60;
+    border-radius: 3px;
+}

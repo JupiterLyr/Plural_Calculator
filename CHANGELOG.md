@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.1]
+### Fixed
+- 优化了个别 UI
+- 配置了安装包
+
 ## [1.3.0]
 ### Added
 - 增设了按键绑定，现已支持电脑键盘输入

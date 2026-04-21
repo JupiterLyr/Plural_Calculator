@@ -6,7 +6,7 @@
 - Use the `+/-` button to set whether a number is positive or negative.
 - The yellow `DEL` key means backspace, and the red `AC` key means clear all.
 - Calculator allows arithmetic calculation. But if you accidentally let 0 be the divisor, there will be an error!
-- Press the `a+bi` key to display the complex number of polar coordinate mode as Cartesian coordinate mode, which is convenient for viewing the real part and imaginary part; Press the `a ∠ θ` key to display the complex number of Cartesian coordinate mode as polar coordinate mode, which is convenient for viewing the amplitude and angle.
+- Press the `a+bi` key to display the complex number of polar coordinate mode as Cartesian coordinate mode, which is convenient for viewing the real part and imaginary part; Press the `A∠θ` key to display the complex number of Cartesian coordinate mode as polar coordinate mode, which is convenient for viewing the amplitude and angle.
 - Pressing `=` will draw the result in the "Complex Plane" tab.
 
 ## Shortcut

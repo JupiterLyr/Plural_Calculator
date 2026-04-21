@@ -67,7 +67,7 @@ QPushButton#operator_equal:hover {
 }
 
 QPushButton#operator_equal:pressed {
-    background: #059669;
+    background: #0EBC85;
 }
 
 QPushButton#operator_equal:disabled {
@@ -95,7 +95,7 @@ QPushButton#all_clear:pressed {
 
 QPushButton#backspace {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-        stop:0 #FBBF24,
+        stop:0 #F4C44B,
         stop:1 #F59E0B);
     color: #FFFFFF;
     border: none;

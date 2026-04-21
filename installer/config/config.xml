@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Plural Calculator</Name>
+    <Version>1.3.1</Version>
+    <Title>Plural Calculator Installer</Title>
+    <Publisher>JupiterLyr</Publisher>
+    <TargetDir>@ApplicationsDirX64@/PluralCalculator</TargetDir> <!-- 默认安装路径 -->
+
+    <WizardStyle>Modern</WizardStyle>
+    <WizardDefaultWidth>600</WizardDefaultWidth>
+    <WizardDefaultHeight>400</WizardDefaultHeight>
+    <WizardShowPageList>false</WizardShowPageList>
+    <StyleSheet>config/style.qss</StyleSheet>
+</Installer>
