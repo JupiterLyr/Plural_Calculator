@@ -1,23 +1,28 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include <QDir>
 #include <QFile>
+#include <QStringList>
 
-QString load_qss(const QString& path) {
-    QFile file(path);
-    if (file.open(QFile::ReadOnly))
-        return QLatin1String(file.readAll());
-    return "";
+static QString loadQss(const QStringList& paths) {
+    QStringList parts;
+    parts.reserve(paths.size());
+    for (const auto& path : paths) {
+        QFile file(path);
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            parts << QString::fromUtf8(file.readAll());
+        }
+    }
+    return parts.join('\n');
 }
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
-    QString style;
-    style += load_qss(":/resources/global.qss");
-    style += load_qss(":/resources/calculator.qss");
-    style += load_qss(":/resources/chart.qss");
-    app.setStyleSheet(style);
+    app.setStyleSheet(loadQss({
+        ":/resources/global.qss",
+        ":/resources/calculator.qss",
+        ":/resources/chart.qss"
+        }));
 
     MainWindow win;
     win.show();

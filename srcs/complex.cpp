@@ -57,7 +57,7 @@ Complex Complex::fromString(QString s) {
     }
     if (s.contains('i')) {
         s.remove('i');
-        // 处理形如 "3+4", "3-4", "-3-4" 的情况
+        // 处理形如 "3+4i", "3-4i", "-3-4i" 的情况
         // 寻找最后一个出现的 + 或 - (排除第一个位置)
         int signPos = qMax(s.lastIndexOf('+'), s.lastIndexOf('-'));
         if (signPos <= 0)

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.2]
+- 优化了 QSS 样式表加载逻辑
+
 ## [1.3.1]
 ### Fixed
 - 优化了个别 UI
